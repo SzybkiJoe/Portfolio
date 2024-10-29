@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sty;.css">
+    <title>Portfolio</title>
+</head>
+<body>
+    <header class="banner">
+        <h1>Moje Portfolio</h1>
+    </header>
+    <div class="container">
+        <section class="lewy">
+            <h2>Podaj tekst</h2>
+            <textarea id="tekst" class="textarea">Pole tekstowe</textarea>
+            
+            <h3>Wybierz rozmiar tekstu</h3>
+            <select class="wybor" id="wielk">
+                <option>Liliput</option>
+                <option>Mały</option>
+                <option selected>Średni</option>
+                <option>Duży</option>
+                <option>Ogromny</option>
+            </select>
+            
+            <h3>Wybierz kolor tekstu</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="kolor" id="cz" checked/>Czerwony</label>
+                <label><input type="radio" name="kolor" id="z"/>Zielony</label>
+                <label><input type="radio" name="kolor" id="c"/>Cyan</label>
+                <label><input type="radio" name="kolor" id="n"/>Niebieski</label>
+                <label><input type="radio" name="kolor" id="zol"/>Żółty</label>
+                <label><input type="radio" name="kolor" id="los"/>Losowy</label>
+            </div>
+            
+            <h3>Wybierz czcionkę:</h3>
+            <select class="wybor" id="wielk1">
+                <option value="Arial" selected>Arial</option>
+                <option value="Monotype Corsiva">Monotype Corsiva</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Georgia">Georgia</option>
+            </select>
+            
+            <p><label><input type="checkbox" id="gruby"/>Czy pogrubisz?</label></p>
+            
+            <p>Wybierz kolor tła strony <input type="color" id="tlo" value="#fff000"/></p>
+            
+            <h3>Czy udekorować?</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="pod" id="bz" checked/>Bez dekoracji</label>
+                <label><input type="radio" name="pod" id="p"/>Podkreślony</label>
+                <label><input type="radio" name="pod" id="nn"/>Nadkreślony</label>
+                <label><input type="radio" name="pod" id="pz"/>Przekreślony</label>
+            </div>
+            
+            <input type="button" class="przycisk" value="Zastosuj" id="zastosuj" onclick="pokaz()">
+        </section>
+        
+        <section class="srodek">
+            <h1 class="gora">Wynik</h1>
+            <div id="wynik" class="wpis"></div>
+        </section>
+    </div>
+
+    <script>
+         function pokaz(){
+            let text= document.getElementById("tekst").value
+            let opcja= document.getElementById("wielk").selectedIndex
+            if (opcja==0) w="10px"
+            if (opcja==1) w="18px"
+            if (opcja==2) w="24px"
+            if (opcja==3) w="40px"
+            if (opcja==4) w="70px"
+        
+        if (document.getElementById('cz').checked) kolor ="red"
+        if (document.getElementById('z').checked) kolor ="green"
+        if (document.getElementById('c').checked) kolor ="cyan"
+        if (document.getElementById('n').checked) kolor ="blue"
+        if (document.getElementById('zol').checked) kolor ="yellow"
+        if (document.getElementById('los').checked){
+            r=Math.floor(Math.random()*256)
+            g=Math.floor(Math.random()*256)
+            b=Math.floor(Math.random()*256)
+             kolor="rgb("+r+","+g+","+b+")"
+        }
+        if (document.getElementById("gruby").checked){
+            document.getElementById("wynik").style.fontWeight="bold"
+        }
+        else document.getElementById("wynik").style.fontWeight="normal"
+        if (document.getElementById('bz').checked) deko ="none"
+        if (document.getElementById('p').checked) deko ="underline"
+        if (document.getElementById('nn').checked) deko ="overline"
+        if (document.getElementById('pz').checked) deko ="line-through"
+        
+        let czciona=document.querySelector("#wielk1").value
+        document.getElementById("wynik").style.fontFamily=czciona
+        document.getElementById("wynik").style.color=kolor
+        document.getElementById("wynik").style.fontSize=w
+        document.getElementById("wynik").innerHTML=text
+        document.getElementById("wynik").style.textDecoration=deko
+        document.body.style.backgroundColor=document.getElementById("tlo").value
+    }
+    </script>
+</body>
+</html>
